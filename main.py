@@ -1,9 +1,10 @@
 import smtplib
 import random
 import datetime as dt
+import os
 
-my_email = "christian1401.mueller@gmail.com"
-password = "cgoiaxqotyhyognx"
+my_email = os.environ["FROM_MAIL"]
+password = os.environ["SMTP_PASSWORD"]
 
 now = dt.datetime.now()
 weekday = now.weekday()
@@ -17,5 +18,5 @@ if weekday == 3:
         connection.login(user=my_email, password=password)
         connection.sendmail(
             from_addr=my_email,
-            to_addrs="christianmueller37@gmail.com",
+            to_addrs=os.environ["TO_MAIL"],
             msg=f"Subject:Quote of the day\n\n{day_quote}")
